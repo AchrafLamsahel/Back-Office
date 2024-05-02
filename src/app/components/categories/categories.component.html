@@ -1,0 +1,52 @@
+<section id="content">
+    <!-- MAIN -->
+    <main>
+        <div class="head-title">
+            <div class="left">
+                <h1>Categories</h1>
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="#">Categories</a>
+                    </li>
+                    <li><i class='bx bx-chevron-right' ></i></li>
+                    <li>
+                        <a class="active" href="/deshboard">Home</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="table-data">
+            <div class="order">
+                <div class="head">
+                    <h3>List Categories</h3>
+                    <i class='bx bx-search' ></i>
+                    <i class='bx bx-filter' ></i>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Category ID</th>
+                            <th>Parent ID</th>
+                            <th>Label</th>
+                            <th>valid</th>
+                            <!-- Ajoute d'autres colonnes au besoin -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let c of categories">
+                            <td>{{c.categoryId}}</td>
+                            <td>{{c.idParent}}</td>
+                            <td>{{c.label}}</td>
+                            <td>{{c.valid}}</td>
+                            <!-- Ajoute d'autres colonnes au besoin -->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <!-- MAIN -->
+</section>
+<!-- CONTENT -->
+
