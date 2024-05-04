@@ -11,6 +11,8 @@ import { LoginComponent } from './components/login/login.component';
 import { ProductsComponent } from './components/products/products.component';
 import { IndexComponent } from './components/index/index.component';
 import { HttpClientModule } from '@angular/common/http';
+import { authInterceptorProviders } from './interceptors/authorization.interceptor';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -28,11 +30,13 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule, /** offre les Gestion de l'état asynchrone , Création dynamique des formulaires, Validation avancée, Suivi des états et des erreurs , Gestion des groupes .... */
+    HttpClientModule,  /**  Offre les classes pour consummer une service Web  GET POST DELETE UPDATE.. */
     HttpClientModule,
     BrowserModule,
     HttpClientModule // Ajoute HttpClientModule ici
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

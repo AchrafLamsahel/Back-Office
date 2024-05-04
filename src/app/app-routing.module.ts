@@ -7,21 +7,25 @@ import { ProductsComponent } from './components/products/products.component';
 import { UsersComponent } from './components/users/users.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
+import { AuthGuard } from './guards/auth.guard';
+import { SideBarComponent } from './components/side-bar/side-bar.component';
 
 const routes: Routes = [
-  { path : '' ,redirectTo:'deshboard', pathMatch: 'full' },
+  { path : '' ,redirectTo:'login', pathMatch: 'full' },
   { path : 'login',component: LoginComponent},
-  { path : 'categories' , component : CategoriesComponent},
-  { path : 'deshboard' , component : IndexComponent},
-  { path : 'products' , component : ProductsComponent},
-  { path : 'users' , component : UsersComponent},
-  { path : 'orders' , component : OrdersComponent},
-  { path : 'contacts' , component : ContactsComponent},
+  { path : 'categories' , component : CategoriesComponent,canActivate:[AuthGuard]},
+  { path : 'deshboard' , component : IndexComponent,canActivate:[AuthGuard]},
+  { path : 'products' , component : ProductsComponent,canActivate:[AuthGuard]},
+  { path : 'users' , component : UsersComponent,canActivate:[AuthGuard]},
+  { path : 'orders' , component : OrdersComponent,canActivate:[AuthGuard]},
+  { path : 'contacts' , component : ContactsComponent,canActivate:[AuthGuard]},
+  { path : 'sidebar' ,component : SideBarComponent,canActivate:[AuthGuard]}
 ];
 
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [Location]
 })
 export class AppRoutingModule { }

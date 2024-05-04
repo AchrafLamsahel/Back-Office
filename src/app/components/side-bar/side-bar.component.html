@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<section id="sidebar">
+	<section id="sidebar" *ngIf="isLoggedIn()">
 		<a href="/deshboard" class="brand">
 			<i class='bx bxs-smile'></i>
 			<span class="text">ADMIN</span>
