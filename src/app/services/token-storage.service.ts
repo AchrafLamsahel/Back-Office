@@ -29,26 +29,32 @@ export class TokenStorageService {
     const token = window.sessionStorage.getItem(TOKEN_KEY);
     if (token) {
       return JSON.parse(token);
-    } return null;
+    } 
+    return null;
   }
   /** Get La Valeur de Token  */
   public getTokenValue(): string | null {
     const token = this.getToken();
     if (token) {
       return token.accessToken;
-    } return null;
+    } 
+    return null;
   }
   /** Get Les Roles à traver le Token  */
   public getRoles(): string[] | null {
     const token = this.getToken();
-    if (token) { return token.roles; } return null;
+    if (token) { 
+      return token.roles; 
+    }
+     return null;
   }
   /** Get email à traver le Token  */
   public getEmail(): string | null {
     const token = this.getToken(); 
     if (token) {
       return token.email;
-    } return null;
+    } 
+    return null;
   }
   /** Does the token have the role ?  */
   public hasRole(role: string): boolean | null {

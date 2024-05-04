@@ -29,16 +29,15 @@ export class LoginComponent implements OnInit{
   
   submit() {
     if (this.form.status === 'VALID') {
-      this.authorizationService.login(<string>this.form.controls['email'].value,
-       <string>this.form.controls['password'].value)
-        .subscribe({
-          next: (data) => {
-            this.tokenStorage.saveToken(data);
-            this.isLoginFailed = false;
-            this.isLoggedIn = true;
-            this.userLoggedIn = <string>this.tokenStorage.getEmail();
-            // this.router.navigate([{ outlets: { primary: 'navbar', contenu: 'contenu' } }]);
-            this.router.navigateByUrl('/deshboard');
+      this.authorizationService.login( <string>this.form.controls['email'].value , <string>this.form.controls['password'].value )
+            .subscribe({
+              next: (data) => {
+                this.tokenStorage.saveToken(data);
+                this.isLoginFailed = false;
+                this.isLoggedIn = true;
+                this.userLoggedIn = <string>this.tokenStorage.getEmail();
+                // this.router.navigate([{ outlets: { primary: 'navbar', contenu: 'contenu' } }]);
+                this.router.navigateByUrl('/deshboard');
           },
           error: (err) => {
             this.errorMessage = err.error.message;
@@ -46,7 +45,6 @@ export class LoginComponent implements OnInit{
           },
           complete : ()=>console.log('Fin')
         });
-    }
-          
+      }    
     }
 }
