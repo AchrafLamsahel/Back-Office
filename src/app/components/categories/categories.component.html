@@ -42,7 +42,18 @@
                             <!-- Ajoute d'autres colonnes au besoin -->
                         </tr>
                     </tbody>
+                    
                 </table>
+                <ul class="pagination">
+                    <a (click)="goToPreviousPage()"><</a> <!-- Lien vers la page précédente -->
+                    <ng-container *ngFor="let page of generateArray(totalPages); let i = index">
+                        <a [class.active]="i === 0 && currentPage === 0 || i === currentPage" (click)="goToPage(i)">
+                            {{ page + 1 }}
+                        </a>
+                    </ng-container>
+                    <a (click)="goToNextPage()">></a> <!-- Lien vers la page suivante -->
+                </ul> 
+                
             </div>
         </div>
     </main>

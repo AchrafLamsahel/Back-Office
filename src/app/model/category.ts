@@ -1,4 +1,4 @@
-export interface category {
+export interface Category {
      categoryId   : number;
      idParent     : number;
      label       : string;

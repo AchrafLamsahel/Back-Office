@@ -11,19 +11,49 @@ import { UsersServiceService } from 'src/app/services/users-service';
 export class UsersComponent implements OnInit{
   users!: user[];
   errorMessage: any;
+  currentPage = 0;
+  pageSize = 2;
+  totalPages = 0;
+  totalElements = 0;
 
-  constructor(private userService: UsersServiceService, private router: Router) {}
+  
+  constructor(private usersService: UsersServiceService, private router: Router) {}
 
   ngOnInit(): void {
-    this.userService.getUsers().subscribe({
-      next: (posts) => {
-        this.users = posts;
-        console.log(this.users);
-      },
-      error: (error) => {
-        this.errorMessage = error;
-      }
-    });
+    this.loadCategories();
   }
+
+  loadCategories(): void {
+    this.usersService.getUsersPage(this.currentPage, this.pageSize).subscribe(items =>{
+      this.users = items.elements;
+      this.totalElements = items.totalElements;
+      this.totalPages = items.totalPages;
+      console.log(items)
+    })
+  }
+
+  goToPage(page: number): void {
+    this.currentPage = page;
+    this.loadCategories();
+  }
+
+  generateArray(length: number): any[] {
+    return Array.from({ length }, (_, i) => i);
+  }
+
+  goToPreviousPage() {
+    if (this.currentPage > 0) {
+      this.currentPage--; 
+      this.loadCategories();
+    }
+  }
+
+  goToNextPage() {
+    if (this.currentPage < this.totalPages - 1) {
+      this.currentPage++; 
+      this.loadCategories();
+    }
+  }
+
 
 }

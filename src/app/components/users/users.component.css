@@ -590,3 +590,24 @@ body {
 		min-width: 420px;
 	}
 }
+
+.pagination{
+	text-align: center;
+  }
+.pagination a{
+	color: #060714;
+	text-decoration: none;
+	padding: 8px 15px;
+	display: inline-block;
+}
+
+.pagination a.active{
+	background-color: #3C91E6;
+	font-weight: bold;
+	border-radius: 3px;
+}
+
+.pagination a:hover:not(.active){
+	background-color: #AAAAAA;
+	border-radius: 3px;
+}
