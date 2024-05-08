@@ -12,7 +12,7 @@ export class UsersComponent implements OnInit{
   users!: user[];
   errorMessage: any;
   currentPage = 0;
-  pageSize = 2;
+  pageSize = 4;
   totalPages = 0;
   totalElements = 0;
 

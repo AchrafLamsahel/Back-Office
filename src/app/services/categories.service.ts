@@ -21,4 +21,16 @@ export class CategoriesService {
     return this.http.get<PageRequestCategoryDTO>(`${this.backendHost}page/${page}/${size}`);
   }
 
+  public deleteCategories(){
+
+  }
+
+  public addCategory(){
+
+  }
+
+  public updateCategory(){
+    
+  }
+
 }

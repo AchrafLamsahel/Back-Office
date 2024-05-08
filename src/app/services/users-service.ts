@@ -23,5 +23,16 @@ export class UsersServiceService {
     return this.http.get<PageRequestUsersDTO>(`${this.backendHost}${page}/${size}`);
   }
 
+  public addUser(){
+
+  }
+
+  public AddRoleToUser(){
+
+  }
+
+  public updateUser(){
+    
+  }
 
 }

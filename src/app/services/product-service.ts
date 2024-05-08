@@ -20,4 +20,16 @@ export class ProductServiceService {
     return this.http.get<PageRequestProductDTO>(`${this.backendHost}page/${page}/${size}`);
   }
 
+  public deleteProduct(){
+
+  }
+
+  public addProduct(){
+
+  }
+
+  public updateProduct(){
+    
+  }
+
 }
