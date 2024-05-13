@@ -16,6 +16,61 @@
                     </li>
                 </ul>
             </div>
+
+        <!-- Button to toggle the popup -->
+        <button class="view-modal" (click)="togglePopup()">+ Add Product</button>
+
+        <!-- Popup form for adding categories -->
+        <div id="myPopup" class="popup" [class.show]="isPopupVisible">
+            <header>
+                <h2>Add Category</h2>
+                <span id="closePopup" class="close" (click)="closePopup()">&times;</span>
+            </header>
+            <div class="text">
+                Contact us Form
+            </div>
+            <form action="#">
+                <div class="form-row">
+                    <div class="input-data">
+                        <input type="text" required>
+                        <div class="underline"></div>
+                        <label for="">First Name</label>
+                    </div>
+                    <div class="input-data">
+                        <input type="text" required>
+                        <div class="underline"></div>
+                        <label for="">Last Name</label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="input-data">
+                        <input type="text" required>
+                        <div class="underline"></div>
+                        <label for="">Email Address</label>
+                    </div>
+                    <div class="input-data">
+                        <input type="text" required>
+                        <div class="underline"></div>
+                        <label for="">Website Name</label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="input-data textarea">
+                        <textarea rows="8" cols="80" required></textarea>
+                        <br />
+                        <div class="underline"></div>
+                        <label for="">Write your message</label>
+                        <br />
+                        <div class="form-row submit-btn">
+                            <div class="input-data">
+                                <div class="inner"></div>
+                                <input type="submit" value="Submit">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
             
         </div>
         <div class="table-data">

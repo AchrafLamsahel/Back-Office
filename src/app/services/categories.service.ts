@@ -13,24 +13,26 @@ export class CategoriesService {
 
   backendHost : string ="http://localhost:8085/categories/";
 
-  public getCategories():Observable<Array<Category>>{
-    return this.http.get<Category[]>(this.backendHost)
-  }
-
   public getCategoriesPage(page: number, size: number): Observable<PageRequestCategoryDTO> {
     return this.http.get<PageRequestCategoryDTO>(`${this.backendHost}page/${page}/${size}`);
   }
-
-  public deleteCategories(){
-
+  
+  public updateProduct(id : number,categories:Category):Observable<Object>{
+  return this.http.put(this.backendHost+"updateCategory/"+id,categories)
   }
 
-  public addCategory(){
-
+  public getProductById(id:any){
+    return this.http.get<Category>(this.backendHost+"/client/product/"+ id)
   }
 
-  public updateCategory(){
-    
+  public deleteCategoryById(id : any){
+    return this.http.delete(this.backendHost+"deleteCategory/"+id)
   }
+
+  public addCategory(category: any) {
+    return this.http.post<Category>(this.backendHost+"addCategory", category);
+  }
+
+
 
 }

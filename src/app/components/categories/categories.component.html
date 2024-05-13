@@ -14,8 +14,64 @@
                     </li>
                 </ul>
             </div>
-        </div>
+            
 
+                <!-- Button to toggle the popup -->
+                <button class="view-modal" (click)="togglePopup()">+ Add Category</button>
+
+                <!-- Popup form for adding categories -->
+                <div id="myPopup" class="popup" [class.show]="isPopupVisible">
+                    <header>
+                        <h2>Add Category</h2>
+                        <span id="closePopup" class="close" (click)="closePopup()">&times;</span>
+                    </header>
+                    <div class="text">
+                        Contact us Form
+                    </div>
+                    <form action="#">
+                        <div class="form-row">
+                            <div class="input-data">
+                                <input type="text" required>
+                                <div class="underline"></div>
+                                <label for="">First Name</label>
+                            </div>
+                            <div class="input-data">
+                                <input type="text" required>
+                                <div class="underline"></div>
+                                <label for="">Last Name</label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-data">
+                                <input type="text" required>
+                                <div class="underline"></div>
+                                <label for="">Email Address</label>
+                            </div>
+                            <div class="input-data">
+                                <input type="text" required>
+                                <div class="underline"></div>
+                                <label for="">Website Name</label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-data textarea">
+                                <textarea rows="8" cols="80" required></textarea>
+                                <br />
+                                <div class="underline"></div>
+                                <label for="">Write your message</label>
+                                <br />
+                                <div class="form-row submit-btn">
+                                    <div class="input-data">
+                                        <div class="inner"></div>
+                                        <input type="submit" value="Submit">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        <!-- Table to display categories -->
         <div class="table-data">
             <div class="order">
                 <div class="head">
@@ -29,8 +85,8 @@
                             <th>Category ID</th>
                             <th>Parent ID</th>
                             <th>Label</th>
-                            <th>valid</th>
-                            <!-- Ajoute d'autres colonnes au besoin -->
+                            <th>Valid</th>
+                            <!-- Add other columns as needed -->
                         </tr>
                     </thead>
                     <tbody>
@@ -39,25 +95,23 @@
                             <td>{{c.idParent}}</td>
                             <td>{{c.label}}</td>
                             <td>{{c.valid}}</td>
-                            <!-- Ajoute d'autres colonnes au besoin -->
+                            <!-- Add other columns as needed -->
                         </tr>
                     </tbody>
-                    
                 </table>
+                <!-- Pagination -->
                 <ul class="pagination">
-                    <a (click)="goToPreviousPage()"><</a> <!-- Lien vers la page précédente -->
+                    <a (click)="goToPreviousPage()"><</a> <!-- Link to previous page -->
                     <ng-container *ngFor="let page of generateArray(totalPages); let i = index">
                         <a [class.active]="i === 0 && currentPage === 0 || i === currentPage" (click)="goToPage(i)">
                             {{ page + 1 }}
                         </a>
                     </ng-container>
-                    <a (click)="goToNextPage()">></a> <!-- Lien vers la page suivante -->
-                </ul> 
-                
+                    <a (click)="goToNextPage()">></a> <!-- Link to next page -->
+                </ul>
             </div>
         </div>
     </main>
     <!-- MAIN -->
 </section>
 <!-- CONTENT -->
-

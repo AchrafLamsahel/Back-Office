@@ -611,3 +611,50 @@ body {
 	background-color: #AAAAAA;
 	border-radius: 3px;
 }
+
+/* Styles for the popup and button */
+.view-modal {
+    color: #111310;
+    font-size: 18px;
+    padding: 10px 25px;
+    background: #fff;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+}
+
+.popup {
+    background: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: auto;
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+    transform: translate(-50%, -50%) scale(1.2);
+    transition: top 0.2s ease-in-out, opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
+}
+
+.popup.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.popup header {
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ebedf9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.popup header .close {
+    cursor: pointer;
+    font-size: 20px;
+}

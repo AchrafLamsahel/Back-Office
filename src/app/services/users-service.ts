@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { user } from '../model/user';
 import { Observable } from 'rxjs';
-import { PageRequestProductDTO } from '../model/PageRequestProductDTO';
 import { PageRequestUsersDTO } from '../model/PageRequestUsersDTO';
 
 @Injectable({
@@ -14,25 +13,24 @@ export class UsersServiceService {
 
   backendHost : string ="http://localhost:8085/users/";
 
-  public getUsers():Observable<Array<user>>{
-    return this.http.get<user[]>(this.backendHost)
-  }
-
-
   public getUsersPage(page: number, size: number): Observable<PageRequestUsersDTO> {
     return this.http.get<PageRequestUsersDTO>(`${this.backendHost}${page}/${size}`);
   }
 
-  public addUser(){
+  public updateUser(id : number,user:user):Observable<Object>{
+    return this.http.put(this.backendHost+"admin/"+id,user)
+    }
+  
+    public getUserById(id:any){
+      return this.http.get<user>(this.backendHost + id)
+    }
+  
+    public deleteUserById(id : any){
+      return this.http.delete(this.backendHost+"/admin/"+id)
+    }
 
-  }
-
-  public AddRoleToUser(){
-
-  }
-
-  public updateUser(){
-    
-  }
+    public addRoleToUserByEmail(productObject: any) {
+      return this.http.post<user>(this.backendHost+"admin/add-role", productObject);
+    }
 
 }

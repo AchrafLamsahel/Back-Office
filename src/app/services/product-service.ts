@@ -12,24 +12,25 @@ export class ProductServiceService {
 
   backendHost : string ="http://localhost:8085/products/";
 
-  public getProducts():Observable<Array<product>>{
-    return this.http.get<product[]>(this.backendHost)
-  }
-
   public getProductsPage(page: number, size: number): Observable<PageRequestProductDTO> {
     return this.http.get<PageRequestProductDTO>(`${this.backendHost}page/${page}/${size}`);
   }
 
-  public deleteProduct(){
-
+  public updateProduct(id : number,product:product):Observable<Object>{
+    return this.http.put(this.backendHost+"/admin/update/"+id,product)
+  }
+  
+  public getProductById(id:any){
+    return this.http.get<product>(this.backendHost+"/client/product/"+ id)
   }
 
-  public addProduct(){
-
+  public deleteProductById(id : any){
+    return this.http.delete(this.backendHost+"/admin/delete/"+id)
   }
 
-  public updateProduct(){
-    
+  public addProduct(product: any) {
+    return this.http.post<product>(this.backendHost+"addProduct", product);
   }
+  
 
 }

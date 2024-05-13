@@ -58,4 +58,14 @@ export class CategoriesComponent  implements OnInit{
     }
   }
 
+  isPopupVisible = false;
+
+  togglePopup(): void {
+    this.isPopupVisible = !this.isPopupVisible;
+  }
+
+  closePopup(): void {
+    this.isPopupVisible = false;
+  }
+
 }
