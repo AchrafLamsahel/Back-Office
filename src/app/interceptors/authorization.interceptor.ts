@@ -14,14 +14,22 @@ export class AuthorizationInterceptor implements HttpInterceptor {
   constructor(private token: TokenStorageService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    let authReq = req; 
+    let authReq = req;
     const token = this.token.getTokenValue();
+    
+    if (req.url.includes('cloudinary.com')) {
+      // Skip adding the Authorization header for Cloudinary requests
+      return next.handle(req);
+    }
+
     if (token != null) {
       authReq = req.clone({ headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token) });
     }
+
     return next.handle(authReq);
   }
 }
+
 
 export const authInterceptorProviders = [{ 
                     provide: HTTP_INTERCEPTORS,

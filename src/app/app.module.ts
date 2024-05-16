@@ -13,6 +13,9 @@ import { IndexComponent } from './components/index/index.component';
 import { HttpClientModule } from '@angular/common/http';
 import { authInterceptorProviders } from './interceptors/authorization.interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
+import {CloudinaryModule} from '@cloudinary/ng';
+import { CommonModule } from '@angular/common';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 
 @NgModule({
@@ -34,6 +37,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,  /**  Offre les classes pour consummer une service Web  GET POST DELETE UPDATE.. */
     HttpClientModule,
     BrowserModule,
+    CloudinaryModule,
+    CommonModule,
+    NgxDropzoneModule,
     HttpClientModule // Ajoute HttpClientModule ici
   ],
   providers: [authInterceptorProviders],

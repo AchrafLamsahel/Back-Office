@@ -16,6 +16,58 @@
                     </li>
                 </ul>
             </div>
+            <!-- Button to toggle the popup -->
+            <button class="view-modal" (click)="togglePopup()">+ Add Order</button>
+
+            <!-- Popup form for adding categories -->
+            <div id="myPopup" class="popup" [class.show]="isPopupVisible">
+                <header>
+                    <h2>Add Category</h2>
+                    <span id="closePopup" class="close" (click)="closePopup()">&times;</span>
+                </header>
+                
+                <form action="#">
+                    <div class="form-row">
+                        <div class="input-data">
+                            <input type="text" required>
+                            <div class="underline"></div>
+                            <label for="">categoryId</label>
+                        </div>
+                        <div class="input-data">
+                            <input type="text" required>
+                            <div class="underline"></div>
+                            <label for="">idParent</label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-data">
+                            <input type="text" required>
+                            <div class="underline"></div>
+                            <label for="">Label</label>
+                        </div>
+                        <div class="input-data">
+                            <input type="text" required>
+                            <div class="underline"></div>
+                            <label for="">categoryTitle</label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-data textarea">
+                            <textarea rows="8" cols="80" required></textarea>
+                            <br />
+                            <div class="underline"></div>
+                            <label for="">description</label>
+                            <br />
+                            <div class="form-row submit-btn">
+                                <div class="input-data">
+                                    <div class="inner"></div>
+                                    <input type="submit" value="Submit">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
             
         </div>
 
@@ -29,73 +81,32 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>User</th>
-                            <th>Date Order</th>
-                            <th>Status</th>
+                            <th>UserID</th>
+                            <th>DeliveryAddress</th>
+                            <th>Orderitems</th>
                         </tr>
                         
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <img src="img/people.png">
-                                <p>John Doe</p>
-                            </td>
-                            <td>01-10-2021</td>
-                            <td><span class="status completed">Completed</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="img/people.png">
-                                <p>John Doe</p>
-                            </td>
-                            <td>01-10-2021</td>
-                            <td><span class="status pending">Pending</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="img/people.png">
-                                <p>John Doe</p>
-                            </td>
-                            <td>01-10-2021</td>
-                            <td><span class="status completed">Completed</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="img/people.png">
-                                <p>John Doe</p>
-                            </td>
-                            <td>01-10-2021</td>
-                            <td><span class="status pending">Pending</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="img/people.png">
-                                <p>John Doe</p>
-                            </td>
-                            <td>01-10-2021</td>
-                            <td><span class="status process">Process</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="img/people.png">
-                                <p>John Doe</p>
-                            </td>
-                            <td>01-10-2021</td>
-                            <td><span class="status pending">Pending</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="img/people.png">
-                                <p>John Doe</p>
-                            </td>
-                            <td>01-10-2021</td>
-                            <td><span class="status completed">Completed</span></td>
+                        <tr *ngFor="let c of order">
+                            <td>{{c.userId}}</td>
+                            <td><button>DeliveryAddress</button></td>
+                            <td><button>Orderitems</button></td>
+                            <!-- Add other columns as needed -->
                         </tr>
                     </tbody>
                 </table>
+                <!-- Pagination -->
+                <ul class="pagination">
+                    <a (click)="goToPreviousPage()"><</a> <!-- Link to previous page -->
+                    <ng-container *ngFor="let page of generateArray(totalPages); let i = index">
+                        <a [class.active]="i === 0 && currentPage === 0 || i === currentPage" (click)="goToPage(i)">
+                            {{ page + 1 }}
+                        </a>
+                    </ng-container>
+                    <a (click)="goToNextPage()">></a> <!-- Link to next page -->
+                </ul>
             </div>
-          
         </div>
     </main>
     <!-- MAIN -->

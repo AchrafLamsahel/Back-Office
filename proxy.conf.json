@@ -1,0 +1,10 @@
+{
+    "/api": {
+      "target": "https://api.cloudinary.com/v1_1/dgsucldvy",
+      "secure": true,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/api": ""
+      }
+    }
+  }

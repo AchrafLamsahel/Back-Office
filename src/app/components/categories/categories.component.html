@@ -28,47 +28,58 @@
                     <div class="text">
                         Contact us Form
                     </div>
-                    <form action="#">
+                    <form [formGroup]="categoryForm" >
                         <div class="form-row">
-                            <div class="input-data">
-                                <input type="text" required>
-                                <div class="underline"></div>
-                                <label for="">First Name</label>
-                            </div>
-                            <div class="input-data">
-                                <input type="text" required>
-                                <div class="underline"></div>
-                                <label for="">Last Name</label>
-                            </div>
+                          <div class="input-data">
+                            <input type="text" formControlName="categoryId" required>
+                            <div class="underline"></div>
+                            <label for="">Category ID</label>
+                          </div>
+                          <div class="input-data">
+                            <input type="text" formControlName="idParent" required>
+                            <div class="underline"></div>
+                            <label for="">Parent ID</label>
+                          </div>
                         </div>
                         <div class="form-row">
-                            <div class="input-data">
-                                <input type="text" required>
-                                <div class="underline"></div>
-                                <label for="">Email Address</label>
-                            </div>
-                            <div class="input-data">
-                                <input type="text" required>
-                                <div class="underline"></div>
-                                <label for="">Website Name</label>
-                            </div>
+                          <div class="input-data">
+                            <input type="text" formControlName="label" required>
+                            <div class="underline"></div>
+                            <label for="">Label</label>
+                          </div>
+                          <div class="input-data">
+                            <input type="text" formControlName="categoryTitle" required>
+                            <div class="underline"></div>
+                            <label for="">Category Title</label>
+                          </div>
+                          <div class="input-data">
+                            <input type="text" formControlName="valid" required>
+                            <div class="underline"></div>
+                            <label for="">Valid</label>
+                          </div>
+                          <ngx-dropzone (change)="onSelect($event)">
+                            <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
+                            <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                              <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                            </ngx-dropzone-preview>
+                          </ngx-dropzone>
                         </div>
                         <div class="form-row">
-                            <div class="input-data textarea">
-                                <textarea rows="8" cols="80" required></textarea>
-                                <br />
-                                <div class="underline"></div>
-                                <label for="">Write your message</label>
-                                <br />
-                                <div class="form-row submit-btn">
-                                    <div class="input-data">
-                                        <div class="inner"></div>
-                                        <input type="submit" value="Submit">
-                                    </div>
-                                </div>
+                          <div class="input-data textarea">
+                            <textarea rows="8" cols="80" formControlName="description" required></textarea>
+                            <br />
+                            <div class="underline"></div>
+                            <label for="">Description</label>
+                            <br/>
+                            <div class="form-row submit-btn">
+                              <div class="input-data">
+                                <div class="inner"></div>
+                                <input type="submit" value="Submit" (click)="uploadfileImage()">
+                              </div>
                             </div>
+                          </div>
                         </div>
-                    </form>
+                      </form>
                 </div>
             </div>
         <!-- Table to display categories -->
