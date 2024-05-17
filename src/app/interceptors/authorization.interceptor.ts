@@ -30,7 +30,6 @@ export class AuthorizationInterceptor implements HttpInterceptor {
   }
 }
 
-
 export const authInterceptorProviders = [{ 
                     provide: HTTP_INTERCEPTORS,
                     useClass: AuthorizationInterceptor,

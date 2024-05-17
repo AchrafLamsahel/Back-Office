@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { catchError, Observable, switchMap, throwError } from 'rxjs';
+import {  Observable} from 'rxjs';
 import { PageRequestCategoryDTO } from 'src/app/model/PageRequestDTO';
 import { Category } from 'src/app/model/category';
 import { CategoriesService } from 'src/app/services/categories.service';
@@ -24,32 +24,63 @@ export class CategoriesComponent  implements OnInit{
   urlImage: string = '';
   categoryForm: FormGroup;
   files: File[] = [];
+
   constructor(private fb: FormBuilder,private categoriesService: CategoriesService, private router: Router,
     private cloudinaryService: CloudinaryService,private http:HttpClient) {
     this.categoryForm = this.fb.group({
-      categoryId: [''],
-      idParent: [''],
-      label: [''],
-      categoryTitle: [''],
-      imageCategory: [''],
-      valid: [''],
-      description: ['']
+      categoryId: ['', Validators.required],
+      idParent: ['', Validators.required],
+      label: ['', Validators.required],
+      categoryTitle: ['', Validators.required],
+      imageUrl: ['', Validators.required],
+      valid: ['', Validators.required],
+      description: ['', Validators.required]
     });
   }
 
-  uploadfileImage(){
-    if(!this.files[0]){
-      alert("No file selected")
+  uploadfileImage() {
+    if (!this.files[0]) {
+      alert("No file selected");
+      return;
     }
+
     const data = new FormData();
     data.append('file', this.files[0]);
-    data.append('upload_preset','Images-Cloud');
-    data.append('cloud_name','dgsucldvy');
-    this.cloudinaryService.uploadImageTest(data).subscribe((res)=>{
-          if(res){
-            console.log(res)
-          }
-    })
+    data.append('upload_preset', 'Images-Cloud');
+    data.append('cloud_name', 'dgsucldvy');
+
+    this.cloudinaryService.uploadImageTest(data).subscribe(
+      (res) => {
+        if (res) {
+          console.log(res);
+          const newCategory: Category = {
+            categoryId: this.categoryForm.value.categoryId,
+            idParent: this.categoryForm.value.idParent,
+            label: this.categoryForm.value.label,
+            slug: '', 
+            description: this.categoryForm.value.description,
+            categoryTitle: this.categoryForm.value.categoryTitle,
+            imageUrl: res.secure_url, 
+            valid: this.categoryForm.value.valid
+          };
+
+          this.categoriesService.addCategory(newCategory).subscribe(
+            data => {
+              console.log("Product added successfully:", data);
+              window.location.reload();
+            },
+            error => {
+              console.error("Error adding product:", error);
+            }
+          );
+        } else {
+          console.error("No response from Cloudinary");
+        }
+      },
+      (error) => {
+        console.error("Error uploading image:", error);
+      }
+    );
   }
 
   onFileChange(event: any) {

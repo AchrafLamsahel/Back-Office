@@ -29,9 +29,11 @@ export class CategoriesService {
     return this.http.delete(this.backendHost+"deleteCategory/"+id)
   }
 
-  public addCategory(category: any) {
+  public addCategory(category: Category): Observable<Category> {
+    console.log("save Post Angular")
     return this.http.post<Category>(this.backendHost+"addCategory", category);
   }
+  
 
 
 

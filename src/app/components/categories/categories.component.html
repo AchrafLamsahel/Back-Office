@@ -1,128 +1,128 @@
 <section id="content">
-    <!-- MAIN -->
-    <main>
-        <div class="head-title">
-            <div class="left">
-                <h1>Categories</h1>
-                <ul class="breadcrumb">
-                    <li>
-                        <a href="#">Categories</a>
-                    </li>
-                    <li><i class='bx bx-chevron-right' ></i></li>
-                    <li>
-                        <a class="active" href="/deshboard">Home</a>
-                    </li>
-                </ul>
-            </div>
-            
+  <!-- MAIN -->
+  <main>
+      <div class="head-title">
+          <div class="left">
+              <h1>Categories</h1>
+              <ul class="breadcrumb">
+                  <li>
+                      <a href="#">Categories</a>
+                  </li>
+                  <li><i class='bx bx-chevron-right' ></i></li>
+                  <li>
+                      <a class="active" href="/deshboard">Home</a>
+                  </li>
+              </ul>
+          </div>
+          
 
-                <!-- Button to toggle the popup -->
-                <button class="view-modal" (click)="togglePopup()">+ Add Category</button>
+              <!-- Button to toggle the popup -->
+              <button class="view-modal" (click)="togglePopup()">+ Add Category</button>
 
-                <!-- Popup form for adding categories -->
-                <div id="myPopup" class="popup" [class.show]="isPopupVisible">
-                    <header>
-                        <h2>Add Category</h2>
-                        <span id="closePopup" class="close" (click)="closePopup()">&times;</span>
-                    </header>
-                    <div class="text">
-                        Contact us Form
-                    </div>
-                    <form [formGroup]="categoryForm" >
-                        <div class="form-row">
-                          <div class="input-data">
-                            <input type="text" formControlName="categoryId" required>
-                            <div class="underline"></div>
-                            <label for="">Category ID</label>
-                          </div>
-                          <div class="input-data">
-                            <input type="text" formControlName="idParent" required>
-                            <div class="underline"></div>
-                            <label for="">Parent ID</label>
-                          </div>
+              <!-- Popup form for adding categories -->
+              <div id="myPopup" class="popup" [class.show]="isPopupVisible">
+                  <header>
+                      <h2>Add Category</h2>
+                      <span id="closePopup" class="close" (click)="closePopup()">&times;</span>
+                  </header>
+                  <div class="text">
+                      Contact us Form
+                  </div>
+                  <form [formGroup]="categoryForm" (click)="uploadfileImage()">
+                      <div class="form-row">
+                        <div class="input-data">
+                          <input type="text" formControlName="categoryId" required>
+                          <div class="underline"></div>
+                          <label for="">Category ID</label>
                         </div>
-                        <div class="form-row">
-                          <div class="input-data">
-                            <input type="text" formControlName="label" required>
-                            <div class="underline"></div>
-                            <label for="">Label</label>
-                          </div>
-                          <div class="input-data">
-                            <input type="text" formControlName="categoryTitle" required>
-                            <div class="underline"></div>
-                            <label for="">Category Title</label>
-                          </div>
-                          <div class="input-data">
-                            <input type="text" formControlName="valid" required>
-                            <div class="underline"></div>
-                            <label for="">Valid</label>
-                          </div>
-                          <ngx-dropzone (change)="onSelect($event)">
-                            <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
-                            <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
-                              <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-                            </ngx-dropzone-preview>
-                          </ngx-dropzone>
+                        <div class="input-data">
+                          <input type="text" formControlName="idParent" required>
+                          <div class="underline"></div>
+                          <label for="">Parent ID</label>
                         </div>
-                        <div class="form-row">
-                          <div class="input-data textarea">
-                            <textarea rows="8" cols="80" formControlName="description" required></textarea>
-                            <br />
-                            <div class="underline"></div>
-                            <label for="">Description</label>
-                            <br/>
-                            <div class="form-row submit-btn">
-                              <div class="input-data">
-                                <div class="inner"></div>
-                                <input type="submit" value="Submit" (click)="uploadfileImage()">
-                              </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="input-data">
+                          <input type="text" formControlName="label" required>
+                          <div class="underline"></div>
+                          <label for="">Label</label>
+                        </div>
+                        <div class="input-data">
+                          <input type="text" formControlName="categoryTitle" required>
+                          <div class="underline"></div>
+                          <label for="">Category Title</label>
+                        </div>
+                        <div class="input-data">
+                          <input type="text" formControlName="valid" required>
+                          <div class="underline"></div>
+                          <label for="">Valid</label>
+                        </div>
+                        <ngx-dropzone (change)="onSelect($event)">
+                          <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
+                          <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                          </ngx-dropzone-preview>
+                        </ngx-dropzone>
+                      </div>
+                      <div class="form-row">
+                        <div class="input-data textarea">
+                          <textarea rows="8" cols="80" formControlName="description" required></textarea>
+                          <br />
+                          <div class="underline"></div>
+                          <label for="">Description</label>
+                          <br/>
+                          <div class="form-row submit-btn">
+                            <div class="input-data">
+                              <div class="inner"></div>
+                              <input type="submit" value="Submit">
                             </div>
                           </div>
                         </div>
-                      </form>
-                </div>
-            </div>
-        <!-- Table to display categories -->
-        <div class="table-data">
-            <div class="order">
-                <div class="head">
-                    <h3>List Categories</h3>
-                    <i class='bx bx-search' ></i>
-                    <i class='bx bx-filter' ></i>
-                </div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Category ID</th>
-                            <th>Parent ID</th>
-                            <th>Label</th>
-                            <th>Valid</th>
-                            <!-- Add other columns as needed -->
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let c of categories">
-                            <td>{{c.categoryId}}</td>
-                            <td>{{c.idParent}}</td>
-                            <td>{{c.label}}</td>
-                            <td>{{c.valid}}</td>
-                            <!-- Add other columns as needed -->
-                        </tr>
-                    </tbody>
-                </table>
-                <!-- Pagination -->
-                <ul class="pagination">
-                    <a (click)="goToPreviousPage()"><</a> <!-- Link to previous page -->
-                    <ng-container *ngFor="let page of generateArray(totalPages); let i = index">
-                        <a [class.active]="i === 0 && currentPage === 0 || i === currentPage" (click)="goToPage(i)">
-                            {{ page + 1 }}
-                        </a>
-                    </ng-container>
-                    <a (click)="goToNextPage()">></a> <!-- Link to next page -->
-                </ul>
-            </div>
-        </div>
-    </main>
-    <!-- MAIN -->
+                      </div>
+                    </form>
+              </div>
+          </div>
+      <!-- Table to display categories -->
+      <div class="table-data">
+          <div class="order">
+              <div class="head">
+                  <h3>List Categories</h3>
+                  <i class='bx bx-search' ></i>
+                  <i class='bx bx-filter' ></i>
+              </div>
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th>Category ID</th>
+                          <th>Parent ID</th>
+                          <th>Label</th>
+                          <th>Valid</th>
+                          <!-- Add other columns as needed -->
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let c of categories">
+                          <td>{{c.categoryId}}</td>
+                          <td>{{c.idParent}}</td>
+                          <td>{{c.label}}</td>
+                          <td>{{c.valid}}</td>
+                          <!-- Add other columns as needed -->
+                      </tr>
+                  </tbody>
+              </table>
+              <!-- Pagination -->
+              <ul class="pagination">
+                  <a (click)="goToPreviousPage()"><</a> <!-- Link to previous page -->
+                  <ng-container *ngFor="let page of generateArray(totalPages); let i = index">
+                      <a [class.active]="i === 0 && currentPage === 0 || i === currentPage" (click)="goToPage(i)">
+                          {{ page + 1 }}
+                      </a>
+                  </ng-container>
+                  <a (click)="goToNextPage()">></a> <!-- Link to next page -->
+              </ul>
+          </div>
+      </div>
+  </main>
+  <!-- MAIN -->
 </section>
 <!-- CONTENT -->
