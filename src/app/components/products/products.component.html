@@ -23,43 +23,59 @@
         <!-- Popup form for adding categories -->
         <div id="myPopup" class="popup" [class.show]="isPopupVisible">
             <header>
-                <h2>Add Category</h2>
+                <h2>Add Product</h2>
                 <span id="closePopup" class="close" (click)="closePopup()">&times;</span>
             </header>
             <div class="text">
-                Contact us Form
+                Add Product
             </div>
-            <form action="#">
+            <form [formGroup]="productForm" (click)="uploadfileImage()">
                 <div class="form-row">
                     <div class="input-data">
-                        <input type="text" required>
+                        <input type="text" formControlName="productId" required>
                         <div class="underline"></div>
-                        <label for="">First Name</label>
+                        <label for="">ProductID</label>
                     </div>
                     <div class="input-data">
-                        <input type="text" required>
+                        <input type="text" formControlName="label" required>
                         <div class="underline"></div>
-                        <label for="">Last Name</label>
+                        <label for="">Label</label>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="input-data">
-                        <input type="text" required>
+                        <input type="text" formControlName="productTitle" required>
                         <div class="underline"></div>
-                        <label for="">Email Address</label>
+                        <label for="">EProduct Title</label>
                     </div>
                     <div class="input-data">
-                        <input type="text" required>
+                        <input type="text" formControlName="price" required>
                         <div class="underline"></div>
-                        <label for="">Website Name</label>
+                        <label for="">Price</label>
                     </div>
+                    <div class="input-data">
+                        <input type="text" formControlName="idCategory" required>
+                        <div class="underline"></div>
+                        <label for="">IdCategory</label>
+                    </div>
+                    <div class="input-data">
+                        <input type="text" formControlName="valid" required>
+                        <div class="underline"></div>
+                        <label for="">Valid</label>
+                    </div>
+                    <ngx-dropzone (change)="onSelect($event)">
+                        <ngx-dropzone-label>Drop Image</ngx-dropzone-label>
+                        <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                          <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                        </ngx-dropzone-preview>
+                      </ngx-dropzone>
                 </div>
                 <div class="form-row">
                     <div class="input-data textarea">
-                        <textarea rows="8" cols="80" required></textarea>
+                        <textarea rows="8" cols="80" formControlName="description" required></textarea>
                         <br />
                         <div class="underline"></div>
-                        <label for="">Write your message</label>
+                        <label for="">Description</label>
                         <br />
                         <div class="form-row submit-btn">
                             <div class="input-data">
@@ -83,6 +99,7 @@
                 <table>
                     <thead>
                         <tr>
+                            <th>Image Product</th>
                             <th>productId</th>
                             <th>productTitle</th>
                             <th>price</th>
@@ -92,6 +109,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let c of products">
+                            <td><img src="{{c.imageUrl}}"></td>
                             <td>{{c.productId}}</td>
                             <td>{{c.productTitle}}</td>
                             <td>{{c.price}} DH</td>

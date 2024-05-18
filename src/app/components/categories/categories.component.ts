@@ -92,20 +92,6 @@ export class CategoriesComponent  implements OnInit{
     }
   }
 
-  onSubmit() {
-    const formData = this.categoryForm.value;
-    this.cloudinaryService.uploadImage(formData.imageCategory).subscribe(
-      (response) => {
-        formData.imageCategory = response.secure_url;
-        this.saveCategory(formData);
-      },
-      (error) => {
-        console.error('Error uploading image to Cloudinary', error);
-      }
-    );
-  }
-
-
 onSelect(event: any) {
   console.log(event);
   this.files.push(...event.addedFiles);

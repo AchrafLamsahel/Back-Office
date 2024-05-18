@@ -19,11 +19,11 @@ export class UsersServiceService {
 
   public updateUser(id : number,user:user):Observable<Object>{
     return this.http.put(this.backendHost+"admin/"+id,user)
-    }
+  }
   
-    public getUserById(id:any){
+  public getUserById(id:any){
       return this.http.get<user>(this.backendHost + id)
-    }
+  }
   
     public deleteUserById(id : any){
       return this.http.delete(this.backendHost+"/admin/"+id)

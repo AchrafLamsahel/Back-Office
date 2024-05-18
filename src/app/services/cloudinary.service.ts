@@ -12,17 +12,9 @@ export class CloudinaryService {
 
   constructor(private http: HttpClient) { }
 
-  uploadImage(image: File): Observable<any> {
-    const formData = new FormData();
-    formData.append('file', image);
-    formData.append('upload_preset', this.uploadPreset);
-    return this.http.post(this.cloudinaryUrl, formData);
-  }
-
   uploadImageTest(image: any): Observable<any> {
     image.append('upload_preset', this.uploadPreset);
     return this.http.post(this.cloudinaryUrl,image)
-    //return this.http.post('/api/image/upload', image);
   }
  
 }

@@ -1,5 +1,4 @@
 <section id="content">
-  <!-- MAIN -->
   <main>
       <div class="head-title">
           <div class="left">
@@ -14,12 +13,7 @@
                   </li>
               </ul>
           </div>
-          
-
-              <!-- Button to toggle the popup -->
-              <button class="view-modal" (click)="togglePopup()">+ Add Category</button>
-
-              <!-- Popup form for adding categories -->
+              <button class="view-modal" (click)="togglePopup()">+ Add Category</button>              
               <div id="myPopup" class="popup" [class.show]="isPopupVisible">
                   <header>
                       <h2>Add Category</h2>
@@ -58,7 +52,7 @@
                           <label for="">Valid</label>
                         </div>
                         <ngx-dropzone (change)="onSelect($event)">
-                          <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
+                          <ngx-dropzone-label>Drop Image</ngx-dropzone-label>
                           <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
                             <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
                           </ngx-dropzone-preview>
@@ -93,36 +87,34 @@
               <table class="table">
                   <thead>
                       <tr>
+                          <th>ImageCategory</th>
                           <th>Category ID</th>
                           <th>Parent ID</th>
                           <th>Label</th>
                           <th>Valid</th>
-                          <!-- Add other columns as needed -->
                       </tr>
                   </thead>
                   <tbody>
                       <tr *ngFor="let c of categories">
+                          <td><img src="{{c.imageUrl}}"></td>
                           <td>{{c.categoryId}}</td>
                           <td>{{c.idParent}}</td>
                           <td>{{c.label}}</td>
                           <td>{{c.valid}}</td>
-                          <!-- Add other columns as needed -->
                       </tr>
                   </tbody>
               </table>
               <!-- Pagination -->
               <ul class="pagination">
-                  <a (click)="goToPreviousPage()"><</a> <!-- Link to previous page -->
+                  <a (click)="goToPreviousPage()"><</a> 
                   <ng-container *ngFor="let page of generateArray(totalPages); let i = index">
                       <a [class.active]="i === 0 && currentPage === 0 || i === currentPage" (click)="goToPage(i)">
                           {{ page + 1 }}
                       </a>
                   </ng-container>
-                  <a (click)="goToNextPage()">></a> <!-- Link to next page -->
+                  <a (click)="goToNextPage()">></a> 
               </ul>
           </div>
       </div>
   </main>
-  <!-- MAIN -->
 </section>
-<!-- CONTENT -->

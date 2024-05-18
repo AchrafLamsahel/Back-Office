@@ -31,6 +31,5 @@ export class ProductServiceService {
   public addProduct(product: any) {
     return this.http.post<product>(this.backendHost+"addProduct", product);
   }
-  
 
 }
