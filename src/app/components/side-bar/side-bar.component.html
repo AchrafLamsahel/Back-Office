@@ -7,7 +7,6 @@
 	<title>Admin</title>
 </head>
 <body>
-
 	<section id="sidebar" *ngIf="isLoggedIn()">
 		<a href="/deshboard" class="brand">
 			<i class='bx bxs-smile'></i>
@@ -33,12 +32,6 @@
 				</a>
 			</li>
 			<li>
-				<a href="/contacts">
-					<i class='bx bxs-message-dots' ></i>
-					<span class="text">Contact-Us</span>
-				</a>
-			</li>
-			<li>
 				<a href="/users">
 					<i class='bx bxs-group' ></i>
 					<span class="text">Users</span>
@@ -48,6 +41,12 @@
 				<a href="/orders">
 					<i class='bx bxs-group' ></i>
 					<span class="text">Orders</span>
+				</a>
+			</li>
+			<li>
+				<a href="/contacts">
+					<i class='bx bxs-message-dots' ></i>
+					<span class="text">Contact-Us</span>
 				</a>
 			</li>
 		</ul>
@@ -66,6 +65,5 @@
 			</li>
 		</ul>
 	</section>
-	<!-- SIDEBAR -->
 </body>
 </html>

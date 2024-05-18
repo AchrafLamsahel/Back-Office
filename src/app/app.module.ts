@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {CloudinaryModule} from '@cloudinary/ng';
 import { CommonModule } from '@angular/common';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { ErrorNotfoundComponent } from './errors/error-notfound/error-notfound.component';
 
 
 @NgModule({
@@ -28,7 +29,9 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     UsersComponent,
     LoginComponent,
     ProductsComponent,
-    IndexComponent
+    IndexComponent,
+
+    ErrorNotfoundComponent
   ],
   imports: [
     BrowserModule,

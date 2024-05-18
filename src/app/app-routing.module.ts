@@ -9,6 +9,7 @@ import { OrdersComponent } from './components/orders/orders.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { AuthGuard } from './guards/auth.guard';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
+import { ErrorNotfoundComponent } from './errors/error-notfound/error-notfound.component';
 
 const routes: Routes = [
   { path : '' ,redirectTo:'login', pathMatch: 'full' },
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path : 'users' , component : UsersComponent,canActivate:[AuthGuard]},
   { path : 'orders' , component : OrdersComponent,canActivate:[AuthGuard]},
   { path : 'contacts' , component : ContactsComponent,canActivate:[AuthGuard]},
-  { path : 'sidebar' ,component : SideBarComponent,canActivate:[AuthGuard]}
+  { path : 'sidebar' ,component : SideBarComponent,canActivate:[AuthGuard]},
+  { path: '**', component: ErrorNotfoundComponent }
 ];
 
 
