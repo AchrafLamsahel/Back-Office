@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit{
                 this.isLoginFailed = false;
                 this.isLoggedIn = true;
                 this.userLoggedIn = <string>this.tokenStorage.getEmail();
-                // this.router.navigate([{ outlets: { primary: 'navbar', contenu: 'contenu' } }]);
                 this.router.navigateByUrl('/deshboard');
           },
           error: (err) => {

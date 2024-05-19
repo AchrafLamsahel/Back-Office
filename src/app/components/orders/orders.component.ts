@@ -68,4 +68,24 @@ export class OrdersComponent implements OnInit{
     this.isPopupVisible = false;
   }
 
+  isDelivryAdressVisible = false;
+
+  togglePopupDelivryAdress(): void {
+    this.isDelivryAdressVisible = !this.isDelivryAdressVisible;
+  }
+
+  closePopupDeliveryAdress(): void {
+    this.isDelivryAdressVisible = false;
+  }
+
+  isOrderItemsVisible = false;
+
+  togglePopupOrderItems(): void {
+    this.isOrderItemsVisible = !this.isOrderItemsVisible;
+  }
+
+  closePopupOrderItems(): void {
+    this.isOrderItemsVisible = false;
+  }
+
 }

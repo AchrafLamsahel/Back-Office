@@ -90,9 +90,48 @@
                     <tbody>
                         <tr *ngFor="let c of order">
                             <td>{{c.userId}}</td>
-                            <td><button>DeliveryAddress</button></td>
-                            <td><button>Orderitems</button></td>
-                            <!-- Add other columns as needed -->
+                            <td><button (click)="togglePopupDelivryAdress()">DeliveryAddress</button></td>
+                            <td><button (click)="togglePopupOrderItems()">Orderitems</button></td>
+                            <div id="myPopup" class="popup" [class.show]="isDelivryAdressVisible">
+                                <div class="popup-content">
+                                    <span (click)="closePopupDeliveryAdress()" class="close">&times;</span>
+                                    <h2>DeliveryAddress</h2>
+                                    <div>
+                                      <p>First Name: {{c.deliveryAddress.firstName}}</p>
+                                      <p>Last Name: {{c.deliveryAddress.lastName}}</p>
+                                      <p>Email: {{c.deliveryAddress.email}}</p>
+                                      <p>Phone: {{c.deliveryAddress.phone}}</p>
+                                      <p>City: {{c.deliveryAddress.city}}</p>
+                                      <p>Comment: {{c.deliveryAddress.comment}}</p>
+                                    </div>
+                                  </div>
+                            </div>
+                            <div id="myPopup" class="popup" [class.show]="isOrderItemsVisible">
+                                <div class="popup-content">
+                                    <div class="popup-content">
+                                        <span (click)="closePopupOrderItems()" class="close">&times;</span>
+                                        <h2>Order Items</h2>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>ProductID</th>
+                                                    <th>Name</th>
+                                                    <th>Price</th>
+                                                    <th>Quantite</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let item of c.items">
+                                                    <td>{{item.productId}}</td>
+                                                    <td>{{item.label}}</td>
+                                                    <td>{{item.price}} DH </td>
+                                                    <td> {{item.qty}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                            </div>
+                        </div>
                         </tr>
                     </tbody>
                 </table>

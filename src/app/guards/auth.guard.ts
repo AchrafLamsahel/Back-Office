@@ -14,19 +14,10 @@ export class AuthGuard  {
   canActivate(
       next: ActivatedRouteSnapshot,
       state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-      if (this.tokenService.getToken() != null) { 
+      if (this.tokenService.getToken() != null && this.tokenService.getRoles()?.includes("ADMIN")) { 
         console.log("TEST");
+        console.log("test Achraf ==> "+ this.tokenService.getRoles()?.includes("ADMIN"))
         console.log(this.tokenService.getToken());
-          let roles = next.data['roles'] as Array<string>
-          // if (roles) {
-          //     if (this.authService.roleMatch(roles)) {
-          //         return true;
-          //     }
-          //     else {
-          //         this.router.navigate(['forbidden']);
-          //         return false;
-          //     }
-          // }
           return true
       }
       console.log(this.tokenService.getToken());
