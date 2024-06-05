@@ -13,9 +13,8 @@ export class LoginComponent implements OnInit{
   isLoginFailed = false;
   errorMessage = '';
   userLoggedIn = '';
-  constructor(private authorizationService: AuthorizationService, private tokenStorage: TokenStorageService, 
-              private route: ActivatedRoute, private router: Router) { }
-    
+  constructor(private authorizationService: AuthorizationService,
+              private tokenStorage: TokenStorageService, private router: Router) { }
   form = new FormGroup({
     email: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required])
@@ -40,6 +39,7 @@ export class LoginComponent implements OnInit{
           },
           error: (err) => {
             this.errorMessage = err.error.message;
+            console.log(this.errorMessage)
             this.isLoginFailed = true;
           },
           complete : ()=>console.log('Fin')

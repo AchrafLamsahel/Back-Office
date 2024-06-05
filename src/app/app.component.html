@@ -1,2 +1,483 @@
 <app-side-bar></app-side-bar>
 <router-outlet></router-outlet>
+
+
+<!--
+        <!DOCTYPE html>
+<html lang="fr" xmlns:th="https://thymeleaf.org">
+<head th:include="fragments/head :: head" th:with="styleFile=@{/assets/css-min/product-details.min.css}"></head>
+<body>
+<header th:include="fragments/header :: header"></header>
+<div>
+    <ul class="breadcumb">
+        <li><a href="/produits/">Catégories</a></li>
+        <li th:if="${data.rootCategory != null }"><a th:href="${'/categories/'+data.rootCategory.slug}"
+                                                     th:text="${data.rootCategory.label}"></a></li>
+        <li th:if="${data.parentCategory != null }"><a th:href="${'/categories/'+data.parentCategory.slug}"
+                                                       th:text="${data.parentCategory.label}"></a></li>
+        <li th:if="${data.category != null }"><a th:href="${'/categories/'+data.category.slug}"
+                                                 th:text="${data.category.label}"></a></li>
+        <li class="active" th:text="${data.product.label}"></li>
+    </ul>
+</div>
+
+<section class="product">
+    <div class="slide-product">
+        <div class="box-img">
+            <div class="slides" th:if="${data.product.imagesLinks != null && data.product.imagesLinks.size != 0 }"
+                 th:each="link, i : ${data.product.imagesLinks}">
+                <img th:src="'/assets/img/' + @{${data.product.ref}} + '/' + @{${link}}" th:alt="${data.product.slug}">
+            </div>
+            <div class="slides" th:if="${data.product.imagesLinks == null || data.product.imagesLinks.size == 0 }">
+                <img th:src="@{/assets/img/product.png}" alt="no picture found">
+            </div>
+            <div class="prevContainer" onclick="plusSlides(-1)"
+                 th:if="${data.product.imagesLinks != null && data.product.imagesLinks.size != 0 }">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"></path>
+                </svg>
+            </div>
+            <div class="nextContainer" onclick="plusSlides(1)"
+                 th:if="${data.product.imagesLinks != null && data.product.imagesLinks.size != 0 }">
+                <svg viewBox="0 0 24 24">
+                    <path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z"></path>
+                </svg>
+            </div>
+        </div>
+        <ul th:if="${data.product.imagesLinks != null && data.product.imagesLinks.size != 0 }">
+            <li class="slide-thumbnail active"><img
+                    th:src="'/assets/img/' + @{${data.product.ref}} + '/' + @{${data.product.imagesLinks[0]}}" alt=""
+                    id="prod-1"></li>
+
+            <li class="slide-thumbnail" th:each="link, i : ${data.product.imagesLinks}" th:if="${i.index > 0}">
+                <img th:src="'/assets/img/' + @{${data.product.ref}} + '/' + @{${link}}" alt="" id="prod-">
+            </li>
+
+        </ul>
+    </div>
+    <div class="content-product">
+        <p class="heading" th:text="${T(org.jsoup.Jsoup).parse(data.product.description).text()}"></p>
+        <h1 th:text="${data.product.label}"></h1>
+        <h2 th:text="${data.product.marque}" class="mb-1"></h2>
+        <span class="price" th:text="${#numbers.formatDecimal(data.product.priceTtc, 1, 2)}+'€'"></span>
+
+        <p class="text-pre-wrap" th:text="${data.product.pointsFortes}"></p>
+
+        <div class="item" th:if="${data.product.marque != null}">
+            <h2>Marque :</h2>
+            <p th:text="${data.product.marque}"></p>
+        </div>
+
+        <div class="item" th:if="${data.product.domain != null}">
+            <h2>Domaine d’utilisation</h2>
+            <p th:text="${data.product.domain}"></p>
+        </div>
+
+        <div class="item" th:if="${data.product.description != null}">
+            <h2>Principales caractéristiques :</h2>
+            <p th:text="${data.product.description}"></p>
+        </div>
+
+        <div class="item" th:if="${data.product.formation != null}">
+            <h2>Formation : </h2>
+            <p th:text="${data.product.formation}"></p>
+        </div>
+
+        <div class="items">
+            <div class="item">
+                <h2>Dimensions</h2>
+                <ul>
+                    <li th:text="'Longueur: ' + ${data.product.length} + 'mm'"></li>
+                    <li th:text="'Largeur: ' + ${data.product.width} + 'mm'"></li>
+                    <li th:text="'Hauteur: ' + ${data.product.height} + 'mm'"></li>
+                    <li th:text="'Poids: ' + ${data.product.weight} + 'Kg'"></li>
+                </ul>
+            </div>
+            <div class="item" th:if="${data.product.formation != null}">
+                <h2>Réglementation</h2>
+                <p class="text-pre-wrap" th:text="${data.product.reglementation}"></p>
+            </div>
+            <div class="item">
+                <h2>Liens</h2>
+                <a th:href="${ data.product.pdfLink != null && !data.product.pdfLink.isEmpty() ? data.product.pdfLink : '#' }"
+                   th:target="${ data.product.pdfLink != null && !data.product.pdfLink.isEmpty() ? '_blank' : '' }"><img
+                        src="/assets/img/download.png" alt="" width="34" height="34"></a>
+                <a th:href="${data.product.videoLink != null && !data.product.videoLink.isEmpty() ? data.product.videoLink : '#' }"
+                   th:target="${data.product.videoLink != null && !data.product.videoLink.isEmpty() ? '_blank' : '' }"><img
+                        src="/assets/img/youtube.png" alt="" width="34" height="34"></a>
+            </div>
+
+        </div>
+
+        <div>
+            <a  class="btn-red" id="add-to-cart"  th:if="${data.product.valid}" onclick="addToSelection('data.product.label')">Ajouter à votre sélection</a>
+            <span class="btn-red" th:if="${!data.product.valid}">Ce produit n'est plus disponible pour le moment</span>
+        </div>
+
+
+    </div>
+</section>
+
+<div id="myModal" class="modal" tabindex="-1"  aria-hidden="true">
+    <div class="modal-content modal-produit">
+        <button type="button" id="myBtn" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h3>Produit ajouté à votre sélection</h3>
+        <button type="button" onclick="location.href = '/devis';" class="btn btn-blue btn_acele">
+            <span aria-hidden="true">Voir sélection</span>
+        </button>
+        <button type="button" id="continue" data-dismiss="modal" class="btn btn-green btn_acele">
+            <span aria-hidden="true" >Continuer</span>
+        </button>
+    </div>
+
+</div>
+
+<div class="popup">
+    <div class="close" onclick="closePopup()">
+        <img th:src="@{/assets/img/close.png}" alt="" srcset="">
+    </div>
+    <img src="" alt="" srcset="" class="demo-img">
+</div>
+<footer th:include="fragments/footer :: footer"></footer>
+
+<script src="/assets/js-min/product-detail.min.js"></script>
+<script src="/assets/js-min/script.min.js"></script>
+
+</body>
+</html>
+
+
+
+-->
+
+<!--
+    ul.breadcumb {
+    padding: 0 10%;
+    margin: 4rem 0;
+    list-style: none;
+    display: flex;
+}
+ul.breadcumb li,
+ul.breadcumb li a {
+    font-family: 'Poppins-300';
+    font-size: 1.1rem;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    color: #333333;
+    text-decoration: none;
+}
+ul.breadcumb li:not(:last-child):after {
+   content: '>';
+   margin-left: 5px;
+}
+ul.breadcumb li.active {
+    font-family: 'Poppins-600';
+    color: #9D3840 !important;
+}
+section.product {
+    display: grid;
+    grid-template-columns: 39% 59%;
+    gap: 2%;
+}
+.product .box-img,
+.slide-product ul li {
+    width: 100%;
+    background-color: #F5F5F5;
+    margin-bottom: 1rem;
+    position: relative;
+}
+.product .box-img img {
+    height: 340px;
+    margin: 0 auto;
+    display: block;
+    padding: 2rem 1rem;
+    max-width: 80%;
+    object-fit: contain;
+    cursor: pointer;
+}
+.slide-product ul {
+    display: grid;
+    grid-template-columns: 32% 32% 32%;
+    padding: 0;
+    list-style: none;
+    gap: 2%;
+}
+.slide-product ul li img {
+    width: auto;
+    height: 80px;
+    margin: 0 auto;
+    display: block;
+    padding: 1rem;
+    cursor: pointer;
+    max-width: 80%;
+}
+.content-product h1 {
+    font-family: 'Poppins-800';
+    font-weight: 800;
+    font-size: 1.875rem;
+    line-height: 36px;
+    color: #2C5499;
+    margin-bottom: 1rem;
+}
+.content-product p,.content-product li {
+    font-family: 'Poppins-300';
+    font-size: 1rem;
+    line-height: inherit;
+    color: #333333;
+    margin-bottom: 2rem;
+}
+.items {
+    display: grid;
+    grid-template-columns: 35% 61%;
+    column-gap: 2%;
+    row-gap: 6%;
+}
+.content-product h2 {
+    font-family: 'Poppins-700';
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 26px;
+    color: #333333;
+}
+.content-product li{
+    margin: 0;
+}
+.content-product ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.items .item:not(:last-child):before {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 78%;
+    background-color: #333;
+    right: 32px;
+    transform: translateY(-50%);
+    top: 50%;
+}
+.items .item:nth-child(2n):before {
+    display: none;
+}
+.items .item{
+    position: relative;
+}
+.items .item img {
+    width: 40px;
+    margin: 1rem 0;
+    height: 40px;
+}
+.btn-red {
+    background: #9D3840;
+    border-radius: 50px;
+    font-family: 'Poppins-300';
+    font-size: .8rem;
+    line-height: 22px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 0.6rem 1.5rem;
+    margin-top: 1rem;
+    display: block;
+    width: max-content;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-red:hover {
+    background: #2C5499;
+}
+.slide-product ul li.active {
+    opacity: .7;
+    z-index: -1;
+}
+span.price {
+    font-family: 'Poppins-700';
+    color: #9d3840;
+    display: block;
+    margin-bottom: 0.6rem;
+    font-size: 1.6rem;
+}
+.content-product p.heading {
+    font-family: 'Poppins-600';
+    font-size: 1.2rem;
+    margin-bottom: 0.7rem;
+    color: #2C5499;
+}
+.text-pre-wrap{
+    white-space: pre-wrap;
+}
+.mb-1 {
+    margin-bottom: 8px;
+}
+.prevContainer,
+.nextContainer {
+    position: absolute;
+    top: 50%;
+    background-color: rgb('#9D3840');
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+    position: absolute;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.nextContainer {
+    right: 11px;
+}
+.prevContainer {
+    left: 11px;
+}
+.prevContainer svg,
+.nextContainer svg{
+    width: 22px;
+    height: 21px;
+    fill: #fff;
+}
+/**
+*
+*Popup
+*
+**/
+.popup {
+    width: 50%;
+    margin: 0 auto;
+    position: fixed;
+    left: 25%;
+    top: 3%;
+    background-color: #fff;
+    padding: 3rem;
+    display: none;
+    z-index: 1;
+}
+.popup.open {
+    display: block;
+    -webkit-animation: slide-top-50 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: slide-top-50 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    z-index: 9;
+}
+html.open body:before {
+    content: '';
+    background-color: #0e192c91;
+    width: 100%;
+    height: 467%;
+    position: absolute;
+    z-index: 1;
+}
+
+.close {
+    width: 30px;
+    height: 30px;
+    background-color: #9D3840;
+    float: right;
+    margin-top: -35px;
+    margin-right: -31px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.close img {
+    width: 10px;
+    height: 10px;
+}
+
+html.open,
+html.open body {
+    overflow: hidden;
+}
+
+/**
+ * ----------------------------------------
+ * animation slide-top
+ * ----------------------------------------
+ */
+@-webkit-keyframes slide-top-50 {
+    0% {
+        -webkit-transform: translateY(50%);
+        transform: translateY(50%);
+    }
+
+    100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-top-50 {
+    0% {
+        -webkit-transform: translateY(50%);
+        transform: translateY(50%);
+    }
+
+    100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+img.demo-img {
+    width: 100%;
+}
+.alert-info {
+    font-family: 'Poppins-300';
+    color: #055160;
+    background-color: #cff4fc;
+    border-color: #b6effb;
+    position: relative;
+    padding: 1rem 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    margin: 1rem 0;
+}
+/** Media Query **/
+
+@media(max-width:1200px){
+    section.product {
+        grid-template-columns: 100%;
+    }
+    .btn-red {
+        font-size: 0.875rem;
+        padding: 0.6rem 2rem;
+    }
+    .slide-product ul li img {
+        max-width: 70%;
+        object-fit: contain;
+    }
+}
+@media(max-width:767px){
+    .items {
+        grid-template-columns: 49% 49%;
+    }
+    .btn-red {
+        margin-top: 3rem;
+    }
+}
+@media(max-width:576px){
+    .items {
+        grid-template-columns: 100%;
+    }
+    .items .item:not(:last-child):before{
+        display: none;
+    }
+    .prevContainer,
+    .nextContainer {
+        top: auto;
+        bottom: 13px;
+    }
+}
+@media(max-width:991px) {
+    .popup {
+        width: fit-content;
+        left: auto;
+        right: auto;
+    }
+}
+-->

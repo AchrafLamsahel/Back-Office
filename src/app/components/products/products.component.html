@@ -26,9 +26,6 @@
                 <h2>Add Product</h2>
                 <span id="closePopup" class="close" (click)="closePopup()">&times;</span>
             </header>
-            <div class="text">
-                Add Product
-            </div>
             <form [formGroup]="productForm" (click)="uploadfileImage()">
                 <div class="form-row">
                     <div class="input-data">
@@ -113,7 +110,7 @@
                             <td>{{c.productId}}</td>
                             <td>{{c.productTitle}}</td>
                             <td>{{c.price}} DH</td>
-                            <td>{{c.valid}}</td>
+                            <td><span class="status completed">{{c.valid}}</span></td>
                         </tr>
                     </tbody>
                 </table>

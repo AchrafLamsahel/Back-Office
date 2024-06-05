@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { product } from '../model/product';
+import { Product } from '../model/Product';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { PageRequestProductDTO } from '../model/PageRequestProductDTO';
@@ -16,12 +16,12 @@ export class ProductServiceService {
     return this.http.get<PageRequestProductDTO>(`${this.backendHost}page/${page}/${size}`);
   }
 
-  public updateProduct(id : number,product:product):Observable<Object>{
+  public updateProduct(id : number,product:Product):Observable<Object>{
     return this.http.put(this.backendHost+"/admin/update/"+id,product)
   }
   
   public getProductById(id:any){
-    return this.http.get<product>(this.backendHost+"/client/product/"+ id)
+    return this.http.get<Product>(this.backendHost+"/client/product/"+ id)
   }
 
   public deleteProductById(id : any){
@@ -29,7 +29,7 @@ export class ProductServiceService {
   }
 
   public addProduct(product: any) {
-    return this.http.post<product>(this.backendHost+"addProduct", product);
+    return this.http.post<Product>(this.backendHost+"addProduct", product);
   }
 
 }

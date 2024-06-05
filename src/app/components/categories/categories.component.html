@@ -19,9 +19,7 @@
                       <h2>Add Category</h2>
                       <span id="closePopup" class="close" (click)="closePopup()">&times;</span>
                   </header>
-                  <div class="text">
-                      Contact us Form
-                  </div>
+                  
                   <form [formGroup]="categoryForm" (click)="uploadfileImage()">
                       <div class="form-row">
                         <div class="input-data">
@@ -100,7 +98,7 @@
                           <td>{{c.categoryId}}</td>
                           <td>{{c.idParent}}</td>
                           <td>{{c.label}}</td>
-                          <td>{{c.valid}}</td>
+                          <td><span class="status completed">{{c.valid}}</span></td>
                       </tr>
                   </tbody>
               </table>
@@ -115,6 +113,6 @@
                   <a (click)="goToNextPage()">></a> 
               </ul>
           </div>
-      </div>
+      </div>.
   </main>
 </section>

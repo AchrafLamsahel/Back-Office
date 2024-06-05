@@ -25,9 +25,7 @@
                 <h2>Add Category</h2>
                 <span id="closePopup" class="close" (click)="closePopup()">&times;</span>
             </header>
-            <div class="text">
-                Contact us Form
-            </div>
+            
             <form action="#">
                 <div class="form-row">
                     <div class="input-data">
@@ -98,7 +96,7 @@
                             <td>{{c.lastname}}</td>
                             <td>{{c.email}}</td>
                             <td>{{c.numberPhone}}</td>
-                            <td>{{c.isActive}}</td>
+                            <td><span class="status completed">{{c.isActive}}</span></td>
                             <!-- Ajoute d'autres colonnes au besoin -->
                         </tr>
                     </tbody>

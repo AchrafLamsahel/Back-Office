@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -18,7 +17,7 @@ export class CategoriesComponent  implements OnInit{
   pageRequestDTO!: Observable<PageRequestCategoryDTO>;
   errorMessage: any = '';
   currentPage = 0;
-  pageSize = 5;
+  pageSize = 7;
   totalPages = 0;
   totalElements = 0;
   urlImage: string = '';
@@ -26,7 +25,7 @@ export class CategoriesComponent  implements OnInit{
   files: File[] = [];
 
   constructor(private fb: FormBuilder,private categoriesService: CategoriesService, private router: Router,
-    private cloudinaryService: CloudinaryService,private http:HttpClient) {
+    private cloudinaryService: CloudinaryService) {
     this.categoryForm = this.fb.group({
       categoryId: ['', Validators.required],
       idParent: ['', Validators.required],
@@ -40,15 +39,13 @@ export class CategoriesComponent  implements OnInit{
 
   uploadfileImage() {
     if (!this.files[0]) {
-      alert("No file selected");
+      console.log("No file selected");
       return;
     }
-
     const data = new FormData();
     data.append('file', this.files[0]);
     data.append('upload_preset', 'Images-Cloud');
     data.append('cloud_name', 'dgsucldvy');
-
     this.cloudinaryService.uploadImageTest(data).subscribe(
       (res) => {
         if (res) {
@@ -63,7 +60,6 @@ export class CategoriesComponent  implements OnInit{
             imageUrl: res.secure_url, 
             valid: this.categoryForm.value.valid
           };
-
           this.categoriesService.addCategory(newCategory).subscribe(
             data => {
               console.log("Product added successfully:", data);

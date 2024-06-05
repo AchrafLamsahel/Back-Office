@@ -1,7 +1,8 @@
-import { product } from "./product";
+import { Product } from "./Product";
+
 export interface PageRequestProductDTO {
-elements : product[];
- currentPage : number;
- totalPages : number;
- totalElements : number;
+    elements : Product[];
+    currentPage : number;
+    totalPages : number;
+    totalElements : number;
 }

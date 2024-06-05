@@ -62,6 +62,9 @@ body {
 	transition: .3s ease;
 	overflow-x: hidden;
 	scrollbar-width: none;
+	display: flex;
+	flex-direction: column;
+	
 }
 #sidebar::--webkit-scrollbar {
 	display: none;
@@ -159,7 +162,30 @@ body {
 /* SIDEBAR */
 
 
+.gapp {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Ensure the container takes the full height of the viewport */
+}
 
+.side-menu.top {
+    flex: 1; /* Allow the top menu to take as much space as needed */
+}
+
+.side-menu.bottom {
+    margin-top: auto; /* Push the bottom menu to the bottom */
+    padding-bottom: 1rem; /* Optional: add padding to the bottom */
+}
+
+/* Optional: add some padding to the top menu */
+.side-menu.top {
+    padding-top: 1rem;
+}
+
+
+.bottom{
+	justify-content: flex-end;
+}
 
 
 /* CONTENT */

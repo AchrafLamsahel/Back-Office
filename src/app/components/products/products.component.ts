@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { product } from 'src/app/model/product';
+import { Product } from 'src/app/model/Product';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { CloudinaryService } from 'src/app/services/cloudinary.service';
 import { ProductServiceService } from 'src/app/services/product-service';
@@ -14,10 +14,10 @@ import { ProductServiceService } from 'src/app/services/product-service';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent  implements OnInit{
-  products!: product[];
+  products!: Product[];
   errorMessage: any;
   currentPage = 0;
-  pageSize = 5;
+  pageSize = 7;
   totalPages = 0;
   totalElements = 0;
   files: File[] = [];
@@ -30,7 +30,7 @@ export class ProductsComponent  implements OnInit{
       productId: ['', Validators.required],
       label: ['', Validators.required],
       productTitle: ['', Validators.required],
-      price: ['', Validators.required],
+      price: [, Validators.required],
       idCategory: ['', Validators.required],
       valid: ['', Validators.required],
       description: ['', Validators.required]
@@ -39,7 +39,7 @@ export class ProductsComponent  implements OnInit{
 
   uploadfileImage() {
     if (!this.files[0]) {
-      alert("No file selected");
+      console.log("No file selected");
       return;
     }
     const data = new FormData();
@@ -50,17 +50,18 @@ export class ProductsComponent  implements OnInit{
       (res) => {
         if (res) {
           console.log(res);
-          const newProduct: product = {
+          const newProduct: Product = {
             productId: this.productForm.value.productId,
             label: this.productForm.value.label,
             productTitle: this.productForm.value.productTitle,
-            price: this.productForm.value.price,
+            price: parseFloat(this.productForm.value.price),
             slug: '', 
             idCategory: this.productForm.value.idCategory,
             valid: this.productForm.value.valid,
             imageUrl: res.secure_url, 
             description: this.productForm.value.description
           };
+          
           this.productService.addProduct(newProduct).subscribe(
             data => {
               console.log("Product added successfully:", data);
